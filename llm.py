@@ -6,7 +6,7 @@ import json
 
 load_dotenv()
 
-def post(payload: str) -> str:
+def post(payload):
   api_key = os.getenv("GEMINI_API_KEY")
   client = genai.Client(api_key=api_key)
   prompt = base_prompt()

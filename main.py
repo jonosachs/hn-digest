@@ -9,14 +9,14 @@ def run():
   articles = scrape(limit=2)
   print(f"Scraped {len(articles)} articles.")
   
-  #pass to llm for response
+  #send articles to llm for response
   print("Sending payload to LLM API...")
   response = post(payload=articles)
   print("LLM response recieved.")
         
-  #write to file
+  #write content to file
   print("Writing to file.")
-  write(content=response, filename="summary.html")
+  write(content=response, filename="digest.html")
   print("Done.")
   
 run()
