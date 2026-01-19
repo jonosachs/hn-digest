@@ -1,0 +1,14 @@
+.env
+.venv/
+bin/
+include/
+lib/
+pyvenv.cfg
+__pycache__/
+*.pyc
+
+raw.txt
+summary.html
+
+.DS_Store
+tempCodeRunnerFile.py
