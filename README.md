@@ -2,6 +2,8 @@
 
 Generate a simple HTML digest of the latest Hacker News posts using Gemini for summaries and key terms.
 
+![alt text](image.png)
+
 ## What it does
 
 - Scrapes the top Hacker News titles and article text
