@@ -12,18 +12,23 @@ def scrape(limit):
   articles = []
 
   for title in titlelines:
-    hyperlink = title.find("a")
-    link = hyperlink["href"]
-    title = hyperlink.get_text(strip=True)
-  
+    a = title.find("a")
+    
+    if not a:
+      articles.append({title: None, link: None, "extracted_text": None})
+      continue
+    
+    link = a["href"]
+    title = a.get_text(strip=True)
+    extracted_text = None
+    
     try:
       soup = get_soup(link)
       body = soup.body
       extracted_text = body.get_text(" ", strip=True)
-    except:
-      extracted_text = ""
-      print("Failed to extract text")
-      
+    except Exception as e:
+      print(f"Failed to extract text: {e}")
+    
     articles.append({"title": title,"link": link, "extracted_text": extracted_text})
     
   return articles
@@ -32,5 +37,4 @@ def get_soup(url):
   response = requests.get(url)
   response.raise_for_status()
   return BeautifulSoup(response.text, "html.parser")
-  
   

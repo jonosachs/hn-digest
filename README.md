@@ -8,7 +8,7 @@ Generate a simple HTML digest of the latest Hacker News posts using Gemini for s
 
 - Scrapes the top Hacker News titles and article text
 - Sends the articles to Gemini for summaries and key terms
-- Writes an HTML report to `digest.html` and raw JSON to `raw.txt`
+- Writes an HTML report to `digest.html`
 
 ## Requirements
 
@@ -39,7 +39,6 @@ python main.py
 Outputs:
 
 - `summary.html` — rendered digest
-- `raw.txt` — JSON response from the model
 
 ## Configuration
 

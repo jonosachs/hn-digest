@@ -6,8 +6,9 @@ import json
 
 load_dotenv()
 
-def post(payload):
-  api_key = os.getenv("GEMINI_API_KEY")
+def post(payload) -> list[dict]:
+  
+  api_key = os.environ["GEMINI_API_KEY"]
   client = genai.Client(api_key=api_key)
   prompt = base_prompt()
   
@@ -17,7 +18,6 @@ def post(payload):
         contents=f'{prompt}\n{payload}'
     )
   except Exception as e:
-    raise RuntimeError("Bad server response: {e}")
+    raise RuntimeError(f"Bad server response: {e}")
 
   return json.loads(response.text)
-  

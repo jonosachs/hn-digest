@@ -1,0 +1,28 @@
+name: send-daily-email
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout-repository
+        uses: actions/checkout@v3
+
+      - name: set-up-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: install-dependencies
+        run: pip install -r requirements.txt
+
+      - name: send-email
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: python main.py
