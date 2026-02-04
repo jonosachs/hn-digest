@@ -3,8 +3,15 @@ from llm import post
 from send_email import send
 from build_html import build
 from io_helper import write
+import os
 
 def run():
+  print("Checking credentials")
+  if not all([os.environ.get("GEMINI_API_KEY"),
+              os.environ.get('EMAIL_ADD'),
+              os.environ.get('GOOGLE_APP_PASS')]):
+    raise RuntimeError("Could not load credentials")
+  
   #get top <limit> latest articles from HN
   print("Scraping HN...")
   articles = scrape(limit=5)
