@@ -23,7 +23,7 @@ jobs:
 
       - name: send-email
         env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_ADD: ${{ secrets.EMAIL_ADD }}
+          GOOGLE_APP_PASS: ${{ secrets.GOOGLE_APP_PASS }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python main.py
