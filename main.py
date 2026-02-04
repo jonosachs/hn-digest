@@ -4,13 +4,22 @@ from send_email import send
 from build_html import build
 from io_helper import write
 import os
+from google import genai
 
 def run():
+  #fail fast to avoid unnecessary scraping and expending llm rate limits
   print("Checking credentials")
   if not all([os.environ.get("GEMINI_API_KEY"),
               os.environ.get('EMAIL_ADD'),
               os.environ.get('GOOGLE_APP_PASS')]):
     raise RuntimeError("Could not load credentials")
+  
+  print("Checking LLM API connection..")
+  try: 
+    api_key = os.environ["GEMINI_API_KEY"]
+    client = genai.Client(api_key=api_key)
+  except Exception as e:
+    raise RuntimeError("Error establishing LLM API connection: {e}")
   
   #get top <limit> latest articles from HN
   print("Scraping HN...")
