@@ -21,4 +21,3 @@ def send(subject, html_content):
     smtp.login(email, os.environ['GOOGLE_APP_PASS'])
     smtp.send_message(msg)
     print("Email sent.")
-    

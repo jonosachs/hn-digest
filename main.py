@@ -5,6 +5,7 @@ from build_html import build
 from io_helper import write
 import os
 from google import genai
+import smtplib
 
 def run():
   #fail fast to avoid unnecessary scraping and expending llm rate limits
@@ -20,6 +21,14 @@ def run():
     client = genai.Client(api_key=api_key)
   except Exception as e:
     raise RuntimeError("Error establishing LLM API connection: {e}")
+  
+  print("Checking email connection")
+  try:
+    with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
+      smtp.starttls()
+      smtp.login(os.environ['EMAIL_ADD'], os.environ['GOOGLE_APP_PASS'])
+  except Exception as e:
+    raise RuntimeError("Error logging into mail: {e}")
   
   #get top <limit> latest articles from HN
   print("Scraping HN...")
