@@ -20,7 +20,7 @@ def run():
     api_key = os.environ["GEMINI_API_KEY"]
     client = genai.Client(api_key=api_key)
   except Exception as e:
-    raise RuntimeError("Error establishing LLM API connection: {e}")
+    raise RuntimeError(f"Error establishing LLM API connection: {e}")
   
   print("Checking email connection")
   try:
@@ -28,7 +28,7 @@ def run():
       smtp.starttls()
       smtp.login(os.environ['EMAIL_ADD'], os.environ['GOOGLE_APP_PASS'])
   except Exception as e:
-    raise RuntimeError("Error logging into mail: {e}")
+    raise RuntimeError(f"Error logging into mail: {e}")
   
   #get top <limit> latest articles from HN
   print("Scraping HN...")
