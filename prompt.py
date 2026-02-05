@@ -24,7 +24,7 @@ def base_prompt():
 
   [
     {
-      "id": "<id>",
+      "id": "<id: i.e. article number>",
       "title": "<title>",
       "url": "<url>",
       "summary": "<1-3 sentences>",
