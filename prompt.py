@@ -1,5 +1,4 @@
-def base_prompt(): 
-  return '''
+CONTEXT = '''
   You are a technical editor.
 
   Task:
