@@ -18,7 +18,7 @@ def scrape(limit):
       articles.append({title: None, link: None, "extracted_text": None})
       continue
     
-    link = a["href"]
+    link = a.get("href")
     title = a.get_text(strip=True)
     extracted_text = None
     

@@ -6,7 +6,7 @@ def build(content: list[dict]):
   
   for entry in content:
     formatted_terms = ""
-    key_terms = entry["key_terms"]
+    key_terms = entry.get("key_terms", [])
     
     for term in key_terms:
       formatted_terms += f"""
