@@ -65,6 +65,21 @@ You can also trigger the workflow manually from the Actions tab.
 - Update `prompt.py` to adjust the summarization instructions.
 - Edit `template.html` to change the report layout.
 
+## Testing
+
+Run the unit tests with pytest:
+
+```bash
+pytest test_llm.py -s
+```
+
+Tests cover LLM API response parsing and retry behaviour on malformed JSON.
+
+## Error handling
+
+- **Fail-fast startup checks**: Before scraping or calling the LLM, the app validates that all credentials are present, the Gemini API connection is reachable, and the email login succeeds. This avoids wasting time and token limits on a run that would fail later.
+- **LLM retry with backoff**: If the Gemini API returns a 429 (rate limit) error or a malformed JSON response, the call is automatically retried (up to 3 attempts) with a short delay.
+
 ## Notes
 
 - If an article's body can't be extracted, the summary is inferred from the title.
