@@ -8,7 +8,7 @@ from google import genai
 import smtplib
 
 def run():
-  #fail fast to avoid unnecessary scraping and expending llm rate limits
+  #fail fast to avoid unnecessary scraping and expending llm token limits
   print("Checking credentials")
   if not all([os.environ.get("GEMINI_API_KEY"),
               os.environ.get('EMAIL_ADD'),
@@ -36,7 +36,7 @@ def run():
   print(f"Scraped {len(articles)} articles.")
   
   #send articles to llm for response
-  print("Sending payload to LLM API...")
+  print(f"Sending payload to LLM API...")
   llm_response = post(payload=articles)
   print(f"LLM response recieved ({type(llm_response)}).")
   
