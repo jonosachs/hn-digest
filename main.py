@@ -8,7 +8,9 @@ from google import genai
 import smtplib
 
 def run():
-  #fail fast to avoid unnecessary scraping and expending llm token limits
+  '''Runs main program routine'''
+  
+  # fail fast to avoid unnecessary scraping and expending llm tokens
   print("Checking credentials")
   if not all([os.environ.get("GEMINI_API_KEY"),
               os.environ.get('EMAIL_ADD'),
@@ -30,24 +32,24 @@ def run():
   except Exception as e:
     raise RuntimeError(f"Error logging into mail: {e}")
   
-  #get top <limit> latest articles from HN
+  # scraoe latest articles from HN up to limit
   print("Scraping HN...")
   articles = scrape(limit=5)
   print(f"Scraped {len(articles)} articles.")
   
-  #send articles to llm for response
+  # post articles to llm api to summarise
   print(f"Sending payload to LLM API...")
   llm_response = post(payload=articles)
   print(f"LLM response recieved ({type(llm_response)}).")
   
-  #write raw llm response to file for debugging
+  # write raw llm response to file for debugging
   write("raw.txt", llm_response)
         
-  #build html content from response
+  # build html content from response
   print("Building HTML..")
   html_content = build(llm_response)
   
-  #email formatted content
+  # email formatted content
   send("HN Digest", html_content)
   print("Done.")
 

@@ -2,8 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 
 def scrape(limit):
+  '''Scrapes Hacker News and returns a list of articles'''
+  
+  # attempt to scrape HN
   try:
     soup = get_soup("https://news.ycombinator.com/")
+    #HN uses html <span> elements with class="titlelines" as containers for article links
     titlelines = soup.find_all('span', class_="titleline", limit=limit)
   except:
     print("Failed to retrieve articles")
@@ -11,23 +15,27 @@ def scrape(limit):
 
   articles = []
 
+  # get article title and weblink from html <a> anchor sub-elements
   for title in titlelines:
     a = title.find("a")
     
+    # if no <a> element found give empty entry and continue to next article
     if not a:
       articles.append({title: None, link: None, "extracted_text": None})
       continue
     
+    # otherwise grab link and title
     link = a.get("href")
     title = a.get_text(strip=True)
-    extracted_text = None
     
+    # attempt to scrape weblink for article text
     try:
       soup = get_soup(link)
       body = soup.body
       extracted_text = body.get_text(" ", strip=True)
     except Exception as e:
       print(f"Failed to extract text: {e}")
+      extracted_text = None
     
     articles.append({"title": title,"link": link, "extracted_text": extracted_text})
     

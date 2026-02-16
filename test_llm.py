@@ -5,8 +5,8 @@ def test_post():
   context = ""
   payload = "test"
   attempts = 1
-  test_response = None
-  response = post(payload, context, attempts, test_response)
+  mock_response = None
+  response = post(payload, context, attempts, mock_response)
   
   print(response) #use pytest -s to show
   
@@ -18,8 +18,8 @@ def test_retry():
   context = ""
   payload = ""
   attempts = 3
-  test_response = 'not json'
+  mock_response = 'not json'
   
   with pytest.raises(RuntimeError, match="Malformed json"):
-    response = post(payload, context, attempts, test_response)
+    response = post(payload, context, attempts, mock_response)
   

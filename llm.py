@@ -6,15 +6,27 @@ from prompt import CONTEXT
 import json
 import time
 
-load_dotenv()
+# load environmental variables
+load_dotenv() 
 API_KEY = os.environ["GEMINI_API_KEY"]
+
+# instantiate  llm  client
 CLIENT = genai.Client(api_key=API_KEY)
 
-def post(payload, context=CONTEXT, attempts=3, test_response=None) -> list[dict]:
+def post(payload, context=CONTEXT, attempts=3, mock_response=None) -> list[dict]:
+  '''
+  Makes post request to LLM API
+  
+  :param payload: HN articles for summarising
+  :param context: Context prompt explaining LLM role and response type
+  :param attempts: Number of times to try API call before giving up
+  :param mock_response: Optional mock API response for testing
+  '''
+  
   print("Attempting llm api call..")
   attempts -= 1
   
-  if not test_response:
+  if not mock_response:
     try:
       response = CLIENT.models.generate_content(
         model="gemini-3-flash-preview",
@@ -26,12 +38,13 @@ def post(payload, context=CONTEXT, attempts=3, test_response=None) -> list[dict]
       if e.code == 429:
         if attempts > 0:
           print(f"LLM resource exhausted, retrying.. (attempts remaining: {attempts})")
-          time.sleep(2)
-          return post(payload, context, attempts, test_response)
+          time.sleep(3)
+          return post(payload, context, attempts, mock_response)
       else:
         raise RuntimeError(f"LLM API error [{e.code}]: {e}")
   else:
-    response_text = test_response
+    # allow mock response for testing
+    response_text = mock_response
     
   # parse LLM response as json
   try:
@@ -40,7 +53,7 @@ def post(payload, context=CONTEXT, attempts=3, test_response=None) -> list[dict]
     if attempts > 0:
       print(f"Malformed json response, retrying LLM call.. (attempts remaining: {attempts})")
       time.sleep(1)
-      return post(payload, context, attempts, test_response)
+      return post(payload, context, attempts, mock_response)
     else: 
       raise RuntimeError(f"Malformed json: {e}")
   
