@@ -1,7 +1,7 @@
 from pathlib import Path
 
 def build(content: list[dict]):
-  '''Builds HTML from unstructured content'''
+  '''Builds structured HTML from LLM response'''
   
   # create cards for each article
   cards = ""
@@ -19,15 +19,20 @@ def build(content: list[dict]):
     
     notext = "Text not available"
     
+    if article['notes']:
+      notes = f"<p>Notes: {article['notes']}</p>"
+    else: 
+      notes = "<span><span>"
+    
     cards += f"""
     <div class="card">
       <h2>{article['id']}. {article['title'] or notext}</h2>
       <p>URL: <a href={article['url']}>{article['url']}</a></p>
       <p>Confidence: {article['confidence']}</p>
+      {notes}
       <p>Summary: {article['summary']}</p>
       <p>Significance: {article['why_it_matters']}</p>
       <p>Key Terms: {formatted_terms or notext}</p>
-      <p>Notes: {article['notes']}</p>
     </div>
     """
 
