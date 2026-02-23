@@ -1,7 +1,7 @@
 from pathlib import Path
-import prompt
+from prompt import Articles
 
-def build(content):
+def build(content: dict):
   '''Builds structured HTML from LLM response'''
   
   print("Building HTML..")

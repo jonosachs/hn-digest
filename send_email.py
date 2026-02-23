@@ -12,6 +12,7 @@ def send(subject, html_content):
   email = os.environ['EMAIL_ADD']
   
   # build email message
+  print("Building email..")
   msg = EmailMessage()
   msg["Subject"] = subject
   msg["From"] = email

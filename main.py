@@ -40,7 +40,8 @@ def run(check=True, limit=5):
   llm_response = post(payload=articles)
 
   # build html content from response
-  html_content = build(llm_response)
+  # model_dump() converts a Pydantic model to a dict
+  html_content = build(llm_response.model_dump())
   
   # email formatted content
   send("HN Digest", html_content)
