@@ -7,51 +7,43 @@ import os
 from google import genai
 import smtplib
 
-def run():
+def run(check=True, limit=5):
   '''Runs main program routine'''
   
-  # fail fast to avoid unnecessary scraping and expending llm tokens
-  print("Checking credentials")
-  if not all([os.environ.get("GEMINI_API_KEY"),
-              os.environ.get('EMAIL_ADD'),
-              os.environ.get('GOOGLE_APP_PASS')]):
-    raise RuntimeError("Could not load credentials")
-  
-  print("Checking LLM API connection..")
-  try: 
-    api_key = os.environ["GEMINI_API_KEY"]
-    client = genai.Client(api_key=api_key)
-  except Exception as e:
-    raise RuntimeError(f"Error establishing LLM API connection: {e}")
-  
-  print("Checking email connection")
-  try:
-    with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
-      smtp.starttls()
-      smtp.login(os.environ['EMAIL_ADD'], os.environ['GOOGLE_APP_PASS'])
-  except Exception as e:
-    raise RuntimeError(f"Error logging into mail: {e}")
-  
-  # scraoe latest articles from HN up to limit
-  print("Scraping HN...")
-  articles = scrape(limit=5)
-  print(f"Scraped {len(articles)} articles.")
+  if check:
+    # fail fast to avoid unnecessary scraping and expending llm tokens
+    print("Checking credentials")
+    if not all([os.environ.get("GEMINI_API_KEY"),
+                os.environ.get('EMAIL_ADD'),
+                os.environ.get('GOOGLE_APP_PASS')]):
+      raise RuntimeError("Could not load credentials")
+    
+    print("Checking LLM API connection..")
+    try: 
+      api_key = os.environ["GEMINI_API_KEY"]
+      client = genai.Client(api_key=api_key)
+    except Exception as e:
+      raise RuntimeError(f"Error establishing LLM API connection: {e}")
+    
+    print("Checking email connection")
+    try:
+      with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
+        smtp.starttls()
+        smtp.login(os.environ['EMAIL_ADD'], os.environ['GOOGLE_APP_PASS'])
+    except Exception as e:
+      raise RuntimeError(f"Error logging into mail: {e}")
+    
+  # scrape latest articles from HN up to limit
+  articles = scrape(limit=limit)
   
   # post articles to llm api to summarise
-  print(f"Sending payload to LLM API...")
   llm_response = post(payload=articles)
-  print(f"LLM response recieved ({type(llm_response)}).")
-  
-  # write raw llm response to file for debugging
-  write("raw.txt", llm_response)
-        
+
   # build html content from response
-  print("Building HTML..")
   html_content = build(llm_response)
   
   # email formatted content
   send("HN Digest", html_content)
-  print("Done.")
 
 if __name__ == "__main__":
   run()

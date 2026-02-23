@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 
 def scrape(limit):
   '''Scrapes Hacker News and returns a list of articles'''
-  
+
   # attempt to scrape HN
+  print("Scraping..")
   try:
     soup = get_soup("https://news.ycombinator.com/")
     #HN uses html <span> elements with class="titlelines" as containers for article links
@@ -38,7 +39,8 @@ def scrape(limit):
       extracted_text = None
     
     articles.append({"title": title,"link": link, "extracted_text": extracted_text})
-    
+  
+  print(f"Scraped {len(articles)} articles.")
   return articles
 
 def get_soup(url):

@@ -22,8 +22,12 @@ def send(subject, html_content):
   msg.add_alternative(html_content, subtype="html")
   
   # login to smtp server and send message
-  with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
-    smtp.starttls()
-    smtp.login(email, os.environ['GOOGLE_APP_PASS'])
-    smtp.send_message(msg)
-    print("Email sent.")
+  try:
+    print("Sending email..")
+    with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
+      smtp.starttls()
+      smtp.login(email, os.environ['GOOGLE_APP_PASS'])
+      smtp.send_message(msg)
+      print("Done.")
+  except smtplib.SMTPException as e:
+    print(f"Error sending email: {e}")

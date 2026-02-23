@@ -1,28 +1,30 @@
 from pathlib import Path
+import prompt
 
-def build(content: list[dict]):
+def build(content):
   '''Builds structured HTML from LLM response'''
+  
+  print("Building HTML..")
   
   # create cards for each article
   cards = ""
-  for article in content:
+  for article in content["articles"]:    
     key_terms = article.get("key_terms", [])
     
+    formatted_terms = ""
+    
     if key_terms:
-      formatted_terms = ""
+      formatted_terms += "<ul>"
       for term in key_terms:
-        formatted_terms += f"""
-          <ul>
-            <li>{term['term']} - {term['definition']}</li>
-          </ul>
-        """
+        formatted_terms += f"<li>{term['term']} - {term['definition']}</li>"
+      formatted_terms += "</ul>"
     
     notext = "Text not available"
     
     if article['notes']:
       notes = f"<p>Notes: {article['notes']}</p>"
     else: 
-      notes = "<span><span>"
+      notes = ""
     
     cards += f"""
     <div class="card">
@@ -37,7 +39,8 @@ def build(content: list[dict]):
     """
 
   # insert cards in HTML template body
-  template = Path("template.html").read_text(encoding="utf-8")
+  template = Path("./template.html").read_text(encoding="utf-8")
   
+  print("Done.")
   return template.replace("{{CONTENT}}", cards)
 

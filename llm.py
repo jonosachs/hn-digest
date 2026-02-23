@@ -2,59 +2,48 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import errors
-from prompt import CONTEXT
-import json
+from prompt import CONTEXT, Articles
 import time
 
 # load environmental variables
-load_dotenv() 
+load_dotenv()
 API_KEY = os.environ["GEMINI_API_KEY"]
 
-# instantiate  llm  client
 CLIENT = genai.Client(api_key=API_KEY)
 
-def post(payload, context=CONTEXT, attempts=3, mock_response=None) -> list[dict]:
+def post(payload, context=CONTEXT, max_attempts=3, client=None) -> Articles:
   '''
   Makes post request to LLM API
   
   :param payload: HN articles for summarising
   :param context: Context prompt explaining LLM role and response type
-  :param attempts: Number of times to try API call before giving up
-  :param mock_response: Optional mock API response for testing
+  :param max_attempts: Number of times to try API call before giving up
   '''
   
-  print("Attempting llm api call..")
-  attempts -= 1
-  
-  if not mock_response:
+  client = client or CLIENT
+
+  print("Making post request to llm api..")
+  for attempt in range(max_attempts):
     try:
-      response = CLIENT.models.generate_content(
+      response = client.models.generate_content(
         model="gemini-3-flash-preview",
         contents=f'{context}\n{payload}',
-        config={"response_mime_type": "application/json"}
+        config={
+          "response_mime_type": "application/json",
+          "response_json_schema": Articles.model_json_schema()
+        }
       )
-      response_text = response.text
-    except errors.ClientError as e:
-      if e.code == 429:
-        if attempts > 0:
-          print(f"LLM resource exhausted, retrying.. (attempts remaining: {attempts})")
-          time.sleep(3)
-          return post(payload, context, attempts, mock_response)
-      else:
-        raise RuntimeError(f"LLM API error [{e.code}]: {e}")
-  else:
-    # allow mock response for testing
-    response_text = mock_response
+      
+      summaries = Articles.model_validate_json(response.text)
+      print("Done.")
+      return summaries
     
-  # parse LLM response as json
-  try:
-    json_response = json.loads(response_text)
-  except json.JSONDecodeError as e:
-    if attempts > 0:
-      print(f"Malformed json response, retrying LLM call.. (attempts remaining: {attempts})")
-      time.sleep(1)
-      return post(payload, context, attempts, mock_response)
-    else: 
-      raise RuntimeError(f"Malformed json: {e}")
-  
-  return json_response
+    except errors.APIError as e:
+      print(f"API error {e} retrying..")
+    except Exception as e:
+      print(f"Unexpected error {e}, retrying.. ")
+      
+    if attempt < max_attempts - 1:
+      time.sleep(3 ** attempt) #exponential backoff
+      
+  raise RuntimeError("Could not resolve error, aborting")

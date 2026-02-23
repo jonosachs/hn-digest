@@ -1,0 +1,58 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "I built Timeframe, our family e-paper dashboard",
+      "url": "https://hawksley.org/2026/02/17/timeframe.html",
+      "confidence": "high",
+      "notes": null,
+      "summary": "This article explores the decade-long development of 'Timeframe,' a custom ambient home dashboard. The author details the transition from traditional backlit LCD 'Magic Mirrors' to electrophoretic (e-paper) displays, which reflect ambient light rather than emitting it, making them less visually intrusive at night. The technical progression moves from jailbroken Kindles to professional Visionect hardware and finally to high-resolution Boox Mira Pro monitors capable of real-time updates via HDMI.",
+      "key_terms": [
+        {
+          "term": "E-paper (Electrophoretic Display)",
+          "definition": "A display technology that mimics the appearance of ordinary ink on paper by using electrically charged pigment particles."
+        },
+        {
+          "term": "Long-polling",
+          "definition": "A web communication pattern where the client requests data from the server and the server holds the request open until new information is available."
+        },
+        {
+          "term": "Home Assistant",
+          "definition": "An open-source home automation platform that acts as a central hub for controlling and monitoring smart devices."
+        },
+        {
+          "term": "Headless Browser (IMGKit)",
+          "definition": "A web browser without a graphical user interface, used here to render HTML/CSS into static image files (PNGs) for low-power displays."
+        }
+      ],
+      "why_it_matters": "It demonstrates how to iterate on a long-term side project by balancing hardware constraints, such as refresh rates and power consumption, with a simplified software backend."
+    },
+    {
+      "id": 2,
+      "title": "Show HN: WARN Firehose – Every US layoff notice in one searchable database",
+      "url": "https://warnfirehose.com",
+      "confidence": "high",
+      "notes": null,
+      "summary": "WARN Firehose is a data engineering project that aggregates layoff notices filed under the U.S. Worker Adjustment and Retraining Notification (WARN) Act. Because these notices are published by 50 different state agencies in fragmented formats—including PDFs, Excel files, and HTML tables—the project focuses on the 'Extract, Transform, Load' (ETL) process to create a unified, searchable database. The platform provides access through a REST API and high-performance data formats like Parquet for analytical processing.",
+      "key_terms": [
+        {
+          "term": "WARN Act",
+          "definition": "A U.S. labor law requiring employers with 100 or more employees to provide 60 days' notice of plant closings or mass layoffs."
+        },
+        {
+          "term": "Data Normalization",
+          "definition": "The process of organizing data from disparate sources into a consistent, standardized format to reduce redundancy and improve integrity."
+        },
+        {
+          "term": "Parquet",
+          "definition": "An open-source, column-oriented data file format designed for efficient data storage and retrieval in analytical workloads."
+        },
+        {
+          "term": "JSON-LD",
+          "definition": "A method of encoding linked data using JSON, designed to make data machine-readable in a way that maps to the Semantic Web."
+        }
+      ],
+      "why_it_matters": "It illustrates a practical application of data scraping and normalization to solve the 'siloed data' problem, turning fragmented public records into a high-value structured dataset."
+    }
+  ]
+}

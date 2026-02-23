@@ -1,0 +1,58 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "I built Timeframe, our family e-paper dashboard",
+      "url": "https://hawksley.org/2026/02/17/timeframe.html",
+      "confidence": "high",
+      "notes": null,
+      "summary": "Timeframe is a decade-long DIY project focused on creating a non-intrusive home information display. Unlike traditional LCD or OLED screens that emit light via a backlight—often causing unwanted glare in living spaces—this system utilizes e-paper technology. E-paper works by moving physical pigment capsules to reflect ambient light, making the display look like printed paper and significantly reducing visual clutter. The hardware evolved from simple Kindle hacks to a large-scale 25-inch e-ink monitor capable of real-time updates.",
+      "key_terms": [
+        {
+          "term": "E-paper",
+          "definition": "A display technology that mimics the appearance of ordinary ink on paper by reflecting light rather than emitting it."
+        },
+        {
+          "term": "Home Assistant",
+          "definition": "An open-source central hub for smart home devices that allows different products to communicate with each other."
+        },
+        {
+          "term": "Long-polling",
+          "definition": "A web communication technique where a client requests data from a server and the server holds the request open until new information is available."
+        },
+        {
+          "term": "PPI (Pixels Per Inch)",
+          "definition": "A measurement of pixel density that determines the sharpness and detail of a digital display."
+        }
+      ],
+      "why_it_matters": "It demonstrates how to build ambient computing interfaces that provide high utility without the 'digital fatigue' or light pollution associated with traditional screens."
+    },
+    {
+      "id": 2,
+      "title": "Show HN: WARN Firehose – Every US layoff notice in one searchable database",
+      "url": "https://warnfirehose.com",
+      "confidence": "high",
+      "notes": null,
+      "summary": "WARN Firehose is a data engineering project that aggregates layoff notices filed under the U.S. Worker Adjustment and Retraining Notification (WARN) Act. Because these notices are published by 50 different state agencies in inconsistent formats—ranging from PDFs to unstructured HTML—gathering a national overview is traditionally difficult. This platform automates the scraping and normalization process, turning messy government records into a structured, queryable database with over 100,000 entries.",
+      "key_terms": [
+        {
+          "term": "Data Normalization",
+          "definition": "The process of reorganizing data from different sources into a common, consistent format."
+        },
+        {
+          "term": "REST API",
+          "definition": "A standardized programming interface that allows different software applications to communicate over the web using HTTP requests."
+        },
+        {
+          "term": "Parquet",
+          "definition": "A columnar storage file format optimized for fast data processing and efficient querying of large datasets."
+        },
+        {
+          "term": "Model Context Protocol (MCP)",
+          "definition": "An open standard that enables AI models and assistants to securely connect to external data sources and tools."
+        }
+      ],
+      "why_it_matters": "It transforms fragmented public records into a machine-readable resource, enabling real-time economic analysis and job market tracking that was previously labor-intensive."
+    }
+  ]
+}
