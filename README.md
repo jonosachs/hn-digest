@@ -1,13 +1,13 @@
 # HN Digest
 
-Generate a daily HTML digest of the latest Hacker News posts using Gemini for summaries and key terms, delivered straight to your inbox.
+Generate a daily HTML digest of the latest Hacker News posts using Gemini for summaries and background context, delivered straight to your inbox.
 
 ![alt text](image.png)
 
 ## What it does
 
-- Scrapes the top Hacker News titles and article text
-- Sends the articles to Gemini for summaries and key terms
+- Scrapes the top Hacker News titles, article text, and reader comments
+- Sends the articles to Gemini for summaries, significance, and background context (using structured JSON output)
 - Builds an HTML report and emails it to you
 - Runs automatically via GitHub Actions (daily at 9 AM UTC)
 
@@ -70,10 +70,10 @@ You can also trigger the workflow manually from the Actions tab.
 Run the unit tests with pytest:
 
 ```bash
-pytest test_llm.py -s
+pytest -s
 ```
 
-Tests cover LLM API response parsing and retry behaviour on malformed JSON.
+Tests cover LLM API response parsing and retry behaviour, HTML report generation, HN scraping, and email sending.
 
 ## Error handling
 
@@ -82,7 +82,7 @@ Tests cover LLM API response parsing and retry behaviour on malformed JSON.
 
 ## Notes
 
-- If an article's body can't be extracted, the summary is inferred from the title.
+- If an article's body can't be extracted, reader comments are used as a fallback source. If neither is available, the summary is inferred from the title.
 - Network access is required to scrape HN and call Gemini.
 
 #README generated using Claude CLI
