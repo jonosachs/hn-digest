@@ -4,7 +4,7 @@ from send_email import send
 
 def test_send():
   # load in html content
-  content = read("./test/html_content_.html")
+  content = read("./test/read/html_content.html")
 
   # send test email
   send("test", content)

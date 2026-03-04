@@ -5,10 +5,9 @@ from google.genai import errors
 from prompt import CONTEXT, Articles
 import time
 
-# load environmental variables
 load_dotenv()
-API_KEY = os.environ["GEMINI_API_KEY"]
 
+API_KEY = os.environ["GEMINI_API_KEY"]
 CLIENT = genai.Client(api_key=API_KEY)
 
 def post(payload, context=CONTEXT, max_attempts=3, client=None) -> Articles:
@@ -20,6 +19,7 @@ def post(payload, context=CONTEXT, max_attempts=3, client=None) -> Articles:
   :param max_attempts: Number of times to try API call before giving up
   '''
   
+  # use default google model if no argument provided
   client = client or CLIENT
 
   print("Making post request to llm api..")
