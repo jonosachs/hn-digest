@@ -6,11 +6,11 @@ def test_post():
   # load scraped text payload from file
   MOCK_PAYLOAD = read("./test/scraped.txt")
   
-  # make post request
-  llm_response = post(payload=MOCK_PAYLOAD)
+  # make post request. model_dump converts response object to json
+  llm_response = post(payload=MOCK_PAYLOAD).model_dump()
   
   # write response to file for debugging
-  write("./test/llm_response_.txt", llm_response.model_dump())
+  write("./test/llm_response_.txt", llm_response)
   
   assert llm_response is not None
   

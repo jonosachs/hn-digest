@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape(limit):
+def scrape(limit: int) -> list:
   '''Scrapes Hacker News and returns a list of articles'''
 
   # attempt to scrape HN
@@ -22,23 +22,23 @@ def scrape(limit):
     
     # if no <a> element found give empty entry and continue to next article
     if not a:
-      articles.append({title: None, link: None, "extracted_text": None})
+      articles.append({title: None, url: None, "extracted_text": None})
       continue
     
     # otherwise grab link and title
-    link = a.get("href")
+    url = a.get("href")
     title = a.get_text(strip=True)
     
     # attempt to scrape weblink for article text
     try:
-      soup = get_soup(link)
+      soup = get_soup(url)
       body = soup.body
       extracted_text = body.get_text(" ", strip=True)
     except Exception as e:
       print(f"Failed to extract text: {e}")
       extracted_text = None
     
-    articles.append({"title": title,"link": link, "extracted_text": extracted_text})
+    articles.append({"title": title,"url": url, "extracted_text": extracted_text})
   
   print(f"Scraped {len(articles)} articles.")
   return articles

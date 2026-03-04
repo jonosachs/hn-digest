@@ -2,57 +2,23 @@
   "articles": [
     {
       "id": 1,
-      "title": "I built Timeframe, our family e-paper dashboard",
-      "url": "https://hawksley.org/2026/02/17/timeframe.html",
+      "title": "MacBook Pro with M5 Pro and M5 Max",
+      "url": "https://www.apple.com/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
       "confidence": "high",
       "notes": null,
-      "summary": "Timeframe is a decade-long DIY project focused on creating a non-intrusive home information display. Unlike traditional LCD or OLED screens that emit light via a backlight—often causing unwanted glare in living spaces—this system utilizes e-paper technology. E-paper works by moving physical pigment capsules to reflect ambient light, making the display look like printed paper and significantly reducing visual clutter. The hardware evolved from simple Kindle hacks to a large-scale 25-inch e-ink monitor capable of real-time updates.",
-      "key_terms": [
-        {
-          "term": "E-paper",
-          "definition": "A display technology that mimics the appearance of ordinary ink on paper by reflecting light rather than emitting it."
-        },
-        {
-          "term": "Home Assistant",
-          "definition": "An open-source central hub for smart home devices that allows different products to communicate with each other."
-        },
-        {
-          "term": "Long-polling",
-          "definition": "A web communication technique where a client requests data from a server and the server holds the request open until new information is available."
-        },
-        {
-          "term": "PPI (Pixels Per Inch)",
-          "definition": "A measurement of pixel density that determines the sharpness and detail of a digital display."
-        }
-      ],
-      "why_it_matters": "It demonstrates how to build ambient computing interfaces that provide high utility without the 'digital fatigue' or light pollution associated with traditional screens."
+      "summary": "Apple has announced new 14-inch and 16-inch MacBook Pro models powered by the M5 Pro and M5 Max chips, built on a new \"Fusion Architecture\" that combines two dies into a single system. These processors introduce a next-generation GPU featuring a Neural Accelerator in every core, which helps deliver up to 4x faster AI performance compared to the M4 generation. The laptops also feature the N1 wireless chip for Wi-Fi 7, up to 24 hours of battery life, and SSD storage speeds that have doubled to reach 14.5GB/s. The entry-level storage has been increased to 1TB for the M5 Pro models.",
+      "significance": "This update marks a significant shift in Apple's hardware strategy by moving AI acceleration directly into the GPU cores, signaling a focus on running complex large language models locally on laptops. The introduction of the N1 chip also marks Apple's transition to proprietary silicon for high-performance wireless networking.",
+      "background": "At the center of a computer is the processor, which performs calculations by switching billions of microscopic transistors on and off. Historically, computers used separate chips for the central processor (CPU), the graphics processor (GPU), and the memory (RAM), connected by wires on a motherboard. Apple uses a \"System on a Chip\" (SoC) design where these components are integrated onto a single piece of silicon. This allows for \"Unified Memory,\" where the CPU and GPU access the same pool of data instantly without moving it across a motherboard, which is much faster and more efficient. A \"die\" is the actual square of silicon containing the circuits; Apple's \"Fusion Architecture\" refers to a method of bonding two of these squares together to act as one giant, more powerful processor. Artificial Intelligence (AI) and Large Language Models (LLMs) like those used for chatbots require massive amounts of mathematical data to be processed simultaneously. To handle this, chips use specialized circuits called \"accelerators.\" While previous Apple chips used a separate \"Neural Engine,\" the M5 generation adds these accelerators directly into the GPU cores to allow the graphics hardware to handle both visual rendering and complex AI math at the same time."
     },
     {
       "id": 2,
-      "title": "Show HN: WARN Firehose – Every US layoff notice in one searchable database",
-      "url": "https://warnfirehose.com",
+      "title": "Intel's make-or-break 18A process node debuts for data center with 288-core Xeon",
+      "url": "https://www.tomshardware.com/pc-components/cpus/intels-make-or-break-18a-process-node-debuts-for-data-center-with-288-core-xeon-6-cpu-multi-chip-monster-sports-12-channels-of-ddr5-8000-foveros-direct-3d-packaging-tech",
       "confidence": "high",
       "notes": null,
-      "summary": "WARN Firehose is a data engineering project that aggregates layoff notices filed under the U.S. Worker Adjustment and Retraining Notification (WARN) Act. Because these notices are published by 50 different state agencies in inconsistent formats—ranging from PDFs to unstructured HTML—gathering a national overview is traditionally difficult. This platform automates the scraping and normalization process, turning messy government records into a structured, queryable database with over 100,000 entries.",
-      "key_terms": [
-        {
-          "term": "Data Normalization",
-          "definition": "The process of reorganizing data from different sources into a common, consistent format."
-        },
-        {
-          "term": "REST API",
-          "definition": "A standardized programming interface that allows different software applications to communicate over the web using HTTP requests."
-        },
-        {
-          "term": "Parquet",
-          "definition": "A columnar storage file format optimized for fast data processing and efficient querying of large datasets."
-        },
-        {
-          "term": "Model Context Protocol (MCP)",
-          "definition": "An open standard that enables AI models and assistants to securely connect to external data sources and tools."
-        }
-      ],
-      "why_it_matters": "It transforms fragmented public records into a machine-readable resource, enabling real-time economic analysis and job market tracking that was previously labor-intensive."
+      "summary": "Intel has formally unveiled its \"Clearwater Forest\" Xeon 6+ processors, the first data center CPUs manufactured using the company's highly anticipated 18A (1.8nm-class) process node. The processor features a massive 288-core design utilizing energy-efficient \"Darkmont\" cores spread across 12 compute chiplets. To manage data flow for such a high core count, Intel has integrated over 1GB of last-level cache and supports 12 channels of fast DDR5-8000 memory. The architecture uses Foveros Direct 3D packaging to stack compute tiles vertically on top of base tiles, significantly increasing the density of the processor.",
+      "significance": "The 18A node is Intel's most critical technological milestone in years, intended to reclaim manufacturing leadership from TSMC and prove that Intel can produce the world's most advanced transistors. This 288-core chip targets the cloud and telecom sectors, where high density and built-in AI acceleration can replace racks of traditional hardware.",
+      "background": "Processors are built by etching circuits onto silicon using a technology called a \"process node.\" When companies refer to \"18A\" or \"1.8nm,\" they are describing how small and densely packed the transistors are on the chip; smaller transistors are faster and use less power. Intel, an American company that both designs and makes chips, is currently in a race to match the manufacturing precision of TSMC, the Taiwanese company that makes chips for Apple and Nvidia. Because it is difficult to make one giant, perfect piece of silicon, modern chips are made of \"chiplets\"—multiple smaller pieces connected together in one package. Intel uses \"Foveros\" technology to stack these chiplets vertically (like floors in a skyscraper) and \"EMIB\" bridges to connect them horizontally. Inside the processor, \"cache\" is a small amount of extremely fast memory located right next to the cores to store the data they need most often. Without enough cache, cores must wait for data to travel from the main system RAM, which is much slower. By including over 1GB of cache, Intel ensures that all 288 cores can stay busy with work, making the chip much more efficient for massive cloud computing tasks."
     }
   ]
 }
