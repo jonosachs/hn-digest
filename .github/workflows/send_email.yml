@@ -26,4 +26,4 @@ jobs:
           EMAIL_ADD: ${{ secrets.EMAIL_ADD }}
           GOOGLE_APP_PASS: ${{ secrets.GOOGLE_APP_PASS }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python main.py
+        run: python src/hn_digest/main.py
