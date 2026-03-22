@@ -6,6 +6,9 @@ lib/
 pyvenv.cfg
 __pycache__/
 *.pyc
+.pytest_cache/
+.claude/
+path/
 
 raw.txt
 summary.html

@@ -39,7 +39,7 @@ To generate a Google App Password, go to your Google Account > Security > 2-Step
 ## Run locally
 
 ```bash
-python main.py
+python src/hn_digest/main.py
 ```
 
 This will scrape HN, generate summaries, and email the digest to the configured address.
@@ -61,9 +61,9 @@ You can also trigger the workflow manually from the Actions tab.
 
 ## Configuration
 
-- Edit `main.py` to change the number of articles (`scrape(limit=...)`).
-- Update `prompt.py` to adjust the summarization instructions.
-- Edit `template.html` to change the report layout.
+- Edit `src/hn_digest/main.py` to change the number of articles (`scrape(limit=...)`).
+- Update `src/hn_digest/prompt.py` to adjust the summarization instructions.
+- Edit `src/hn_digest/templates/template.html` to change the report layout.
 
 ## Testing
 
