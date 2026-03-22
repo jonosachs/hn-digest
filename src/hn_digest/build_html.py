@@ -1,5 +1,5 @@
 from pathlib import Path
-from prompt import Articles
+from .prompt import Articles
 
 def build(content: dict):
   '''Builds structured HTML from LLM response'''
@@ -27,8 +27,8 @@ def build(content: dict):
     """
 
   # insert cards in HTML template body
-  template = Path("./template.html").read_text(encoding="utf-8")
-  
+  template = Path(Path(__file__).parent / "templates/template.html").read_text(encoding="utf-8")
+ 
   print("Done.")
   return template.replace("{{CONTENT}}", cards)
 

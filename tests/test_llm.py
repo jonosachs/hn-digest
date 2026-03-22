@@ -1,16 +1,16 @@
 import pytest
-from llm import post
-from io_helper import read, write
+from hn_digest.llm import post
+from hn_digest.io_helper import read, write
 
 def test_post():
   # load scraped text payload from file
-  MOCK_PAYLOAD = read("./test/read/scraped.txt")
+  MOCK_PAYLOAD = read("./tests/read/scraped.txt")
   
   # make post request. model_dump converts response object to json
   llm_response = post(payload=MOCK_PAYLOAD).model_dump()
   
   # write response to file for debugging
-  write("./test/write/llm_response_.txt", llm_response)
+  write("./tests/write/llm_response_.txt", llm_response)
   
   assert llm_response is not None
   

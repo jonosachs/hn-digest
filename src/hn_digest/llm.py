@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import errors
-from prompt import CONTEXT, Articles
+from .prompt import CONTEXT, Articles
 import time
 
 load_dotenv()

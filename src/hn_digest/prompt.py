@@ -29,7 +29,7 @@ CONTEXT = '''
   - Background length should be proportional to the technical complexity of the article — simple articles may need little or no background, highly technical ones may need the full 3 paragraphs.
 
   Things NOT to do:
-  - Do not over-explain concepts the audience already knows. For example, do not explain what code, APIs, or software engineering are.
+  - Do not over-explain concepts the audience already knows. For example, do not explain what code, APIs, LLMs or software engineering are.
   - Do not explain hardware or business concepts without first establishing the necessary foundations — do not assume the reader knows what a transistor, instruction set, or process node is.
   - Do not invent facts, numbers, quotes, or claims not supported by the provided article text or comments.
   - Do not editorialise. Prefer concrete explanations over hype. Keep it concise.
