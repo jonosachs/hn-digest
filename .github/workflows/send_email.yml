@@ -11,19 +11,19 @@ jobs:
 
     steps:
       - name: checkout-repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: set-up-python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: install-dependencies
-        run: pip install -r requirements.txt
+        run: pip install .
 
       - name: send-email
         env:
           EMAIL_ADD: ${{ secrets.EMAIL_ADD }}
           GOOGLE_APP_PASS: ${{ secrets.GOOGLE_APP_PASS }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python src/hn_digest/main.py
+        run: hn-digest

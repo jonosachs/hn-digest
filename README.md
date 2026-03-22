@@ -20,10 +20,10 @@ Generate a daily HTML digest of the latest Hacker News posts using Gemini for su
 ## Setup
 
 1. Create and activate a virtual environment (optional but recommended).
-2. Install dependencies:
+2. Install the package and dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 3. Create a `.env` file in the project root:
@@ -39,7 +39,7 @@ To generate a Google App Password, go to your Google Account > Security > 2-Step
 ## Run locally
 
 ```bash
-python src/hn_digest/main.py
+hn-digest
 ```
 
 This will scrape HN, generate summaries, and email the digest to the configured address.
