@@ -9,7 +9,7 @@ Generate a daily HTML digest of the latest Hacker News posts using Gemini for su
 - Builds an HTML report and emails it to you
 - Runs automatically via GitHub Actions (daily at 9 AM UTC)
 
-## Example summary
+## Example article summary
 
 ```text
 2. DuckDB Internals: Why Is DuckDB Fast? (Part 1)
