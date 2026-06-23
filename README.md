@@ -1,4 +1,4 @@
-# HN Digest
+# HN Digest 🗞️
 
 Generate a daily HTML digest of the latest Hacker News posts using Gemini for summaries and background context, delivered straight to your inbox.
 
