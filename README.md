@@ -2,14 +2,29 @@
 
 Generate a daily HTML digest of the latest Hacker News posts using Gemini for summaries and background context, delivered straight to your inbox.
 
-![alt text](image.png)
-
 ## What it does
 
 - Scrapes the top Hacker News titles, article text, and reader comments
 - Sends the articles to Gemini for summaries, significance, and background context (using structured JSON output)
 - Builds an HTML report and emails it to you
 - Runs automatically via GitHub Actions (daily at 9 AM UTC)
+
+## Example summary
+
+```text
+2. DuckDB Internals: Why Is DuckDB Fast? (Part 1)
+
+URL: https://www.greybeam.ai/blog/duckdb-internals-part-1
+
+Confidence: high
+
+Summary: DuckDB is an analytical database designed to run 'in-process,' meaning it functions as a library within an application rather than a standalone server. This architecture eliminates the overhead of network serialization and communication protocols. DuckDB achieves high performance through columnar storage, which stores data for each column together, and vectorized execution, which processes batches of data at once to maximize CPU efficiency. It also uses 'zone maps' (min/max metadata) to skip irrelevant data blocks during scans.
+
+Significance: DuckDB proves that a single-node, in-process engine can outperform massive database clusters for analytical workloads by focusing on architectural efficiency and zero-copy data sharing.
+
+Background: In a traditional 'server-client' database model, the database is a separate program. When you request data, the server must 'serialize' the results—convert them from their internal memory format into a stream of bytes (a wire protocol)—to send them over a network. Your application then 'deserializes' those bytes back into local data types. This process is slow and consumes significant CPU cycles. DuckDB is an 'in-process' database, meaning it is a 'library' (a reusable piece of code) that you link directly into your software. Because they share the same memory space, DuckDB can use 'zero-copy' techniques, reading data directly from your application's memory without moving it. Databases generally use one of two storage layouts. A 'row store' keeps all data for one record (e.g., a user's ID, name, and age) next to each other. This is fast for looking up one person but slow for analysis. A 'column store' keeps all values for a single column (e.g., every user's age) together. For analytical queries that calculate averages or sums across millions of rows, columnar storage is much faster because the CPU only has to read the specific columns it needs from disk. To further speed up queries, DuckDB uses 'zone maps' and 'vectorized execution.' A 'zone map' is a summary of a block of data that stores the minimum and maximum values within it; if a query looks for values greater than 100 and the zone map says the max is 50, the database skips that block entirely. 'Vectorized execution' means the CPU processes data in 'vectors' (small batches) rather than one row at a time, which allows the chip to stay in a high-speed loop and reduces the number of function calls the program has to make.
+```
+
 
 ## Requirements
 
